@@ -22,6 +22,7 @@ membership_setting() {
 	case "$action" in
 		setup)	# Setup at the time of creating repo
 			echo -e "Setup the membership configuration...."
+			sleep 1
 			# Empty access file create
 			touch $current_repo_access_file
 			
@@ -153,6 +154,7 @@ create_project_repo() {
 			# Change the owner & grp of new repo
 			chown -R git:www-data "$ROOT_DIR/$repo_name"
 			echo -e "Info: Successfully created New Project - $repo_name"
+			sleep 1
 			
 			# Configure project membership seting (extra security - project level authentication)
 			selected_dir_name=$repo_name	# Store the new repo name in selected repo
@@ -418,23 +420,25 @@ add_remove_user_in_member() {	# Note: This function should run after the functio
 				get_user_list
 				# Check if the username is found or not
 				if [ "$found" = true ]; then
-					list_members
 					echo "$username_action" >> "$current_repo_access_file"
 					echo -e "\n User: $username_action '"$action"ed' in access list successfully. \n"
+					sleep 1
 					list_members
 				else
 					echo -e "\n Error: Given username - $username_action is not found in users list. Please enter the valid username... \n"
+					sleep 1
 				fi
 				;;
 			remove)
 				# Verify and print the current_repo_access_file
 				if grep -q "$username_action" "$current_repo_access_file"; then
-					list_members
 					sed -i "/$username_action/d" "$current_repo_access_file"
 					echo -e "\n User: $username_action '"$action"ed' in access list successfully. \n"
+					sleep 1
 					list_members
 				else
 					echo -e "\n Error: Given username - $username_action is not found in member access list of selected repo project...! \n"
+					sleep 1
 				fi
 				;;
 		esac
@@ -467,6 +471,7 @@ add_remove_user_in_member() {	# Note: This function should run after the functio
 		# echo -e "Info: Current Selected project - $selected_dir_name is configured user membership."
 		if [ -x $current_repo_hook_file ]; then
 			# If the repo hook file is enabled (Executable).
+			list_members
 			add_remove_action $action
 			add_remove_another_user_req
 		else
