@@ -1,7 +1,7 @@
 #!/bin/bash
 #----------------------------------------
 # RELEASED BY SATHISH S, OVT
-# DATE -
+# DATE - 29.04.2024
 #----------------------------------------
 
 # ROOT_DIR=/home/git/
@@ -10,14 +10,12 @@ ROOT_DIR="/d/OVT/1000_Office_Internal/GIT_Server/"
 # Defined the raw file contain project members
 HOOK_FILE="hooks/pre-receive"
 HOOK_ACCESS_FILE="/hooks/users_access_list.txt"
-# current_repo_hook_path=$(realpath "$(dirname "$current_repo_hook_file")")
 
 # For this for push request to user
 membership_setting() {
 	current_repo_hook_file="$ROOT_DIR/$selected_dir_name/$HOOK_FILE"
 	current_repo_access_file="$ROOT_DIR/$selected_dir_name/$HOOK_ACCESS_FILE"
 	
-	# if [ ! -d $current_repo_hook_path ]; then
 	action="$1"
 	case "$action" in
 		setup)	# Setup at the time of creating repo
