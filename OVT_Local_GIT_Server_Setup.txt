@@ -1,0 +1,62 @@
+====================================================================
+---------------------------Local GIT Server:------------------------
+====================================================================
+
+Server IP - 192.168.0.150
+
+root:
+	username - ovt
+	password - Ovt@12345
+
+* GIT own server hosting configured in local server.
+
+	Refered link - https://git-scm.com/book/en/v2/Git-on-the-Server-Setting-Up-the-Server
+	
+* And we did extra configuration in apache2 & git home dir for GITWEB hosting and git http connection setup
+
+	1. From apache2 
+		-> added configuration file in /etc/apache2/conf-available/git.conf
+			Configuration:
+				SetEnv GIT_PROJECT_ROOT /home/git
+				SetEnv GIT_HTTP_EXPORT_ALL
+
+				ScriptAlias /git/ /usr/lib/git-core/git-http-backend/
+
+				<Files "git-http-backend">
+					AuthType Basic
+					AuthName "Git Access"
+					AuthUserFile /home/git/.htpasswd
+					Require expr !(%{QUERY_STRING} -strmatch '*service=git-receive-pack*' || %{REQUEST_URI} =~ m#/git-receive-pack$#)
+					Require valid-user
+				</Files>
+
+				<Location /git>
+					AuthType Basic
+					AuthName "Git Access"
+					AuthUserFile /home/git/.htpasswd
+					Require valid-user
+				</Location>
+
+		-> added site configuration in /etc/apache2/site-available/git.conf
+			Configuration:
+				<VirtualHost *:80>
+					ServerName gitserver
+					DocumentRoot /var/www/gitweb
+					ErrorLog ${APACHE_LOG_DIR}/gitweb_error.log
+					CustomLog ${APACHE_LOG_DIR}/gitweb_access.log combined
+					<Directory /var/www/gitweb>
+						Options +ExecCGI +FollowSymLinks +SymLinksIfOwnerMatch
+						AllowOverride All
+						order allow,deny
+						Allow from all
+						Require valid-user
+						AddHandler cgi-script cgi
+						DirectoryIndex gitweb.cgi
+					</Directory>
+				</VirtualHost>
+
+	2. From Home directory /home/git/
+	
+		-> Added script file - create_repo.sh (To create a project)
+		-> Added .htpasswd file for create user (Basic authentication)
+	
