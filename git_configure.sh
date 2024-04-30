@@ -150,7 +150,7 @@ create_project_repo() {
 			find "$ROOT_DIR/$repo_name" -type f -exec chmod 664 {} +
 
 			# Change the owner & grp of new repo
-			chown -R git:www-data "$ROOT_DIR/$repo_name"
+			chown -R www-data:www-data "$ROOT_DIR/$repo_name"	# For now changed owner of git repo (Due to permission issue)
 			echo -e "Info: Successfully created New Project - $repo_name"
 			sleep 1
 			
