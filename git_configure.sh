@@ -144,10 +144,10 @@ create_project_repo() {
 
 			# Setting file and dir permission
 			# Set project directories to rwx (read, write, execute) for owner & grp recursively
-			find "$ROOT_DIR/$repo_name" -type d -exec chmod 775 {} +
+			find "$ROOT_DIR/$repo_name" -type d -exec chmod -R 775 {} +
 
 			# Set files to rw (read, write) for owner & grp recursively
-			find "$ROOT_DIR/$repo_name" -type f -exec chmod 664 {} +
+			find "$ROOT_DIR/$repo_name" -type f -exec chmod -R 664 {} +
 
 			# Change the owner & grp of new repo
 			chown -R www-data:www-data "$ROOT_DIR/$repo_name"	# For now changed owner of git repo (Due to permission issue)
