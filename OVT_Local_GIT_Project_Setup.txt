@@ -1,5 +1,6 @@
 ====================================================================
 -------------Local GIT Server - Project configuration:--------------
+Rev 2.0 - Updated 
 ====================================================================
 
 Server IP - 192.168.0.150
@@ -13,77 +14,27 @@ git:
 	password - Git@12345
 
 
----------------------------------
-For create project in Git server:
----------------------------------
+--------------------------------------------
+For Setup the GIT Configure:
 
+Note: Create repository, user access, & etc 
+--------------------------------------------
 Step-1: Login server as root user
  
 
 Step-2: Go to GIT directory
 
-		$ cd /home/git
+		$ cd /home/ovt
 	
 	* Run below script file to create project repo 
 	
-		$ ./create_repo.sh
+		$ ./git_configure.sh
 
-Note: Project name should have .git extention
-
-	* After created your project, project url like below
+Step-3: After run above cmd it prompt the options.
 	
-		SSH url -> git@192.168.0.150:/home/git/your_project_name.git
-		
-		Http url -> http://192.168.0.150/git/your_project_name.git
-		
-	 Note: Replace your_project_name in url
+	* You can configure what you want related to git
 	
-	* You can refer project commit & history in web-browser
-	
-		Enter server ip in your browser - 192.168.0.150
-	
-----------------------------------
-User/Member access for git server:
-----------------------------------
-
-Type1 - SSH Key access
-----------------------
-
-Step-1: Generate SSH key (id_rsa.pub) 
-
-	* Open cmd/git-bash in User/Member PC, Use below cmd to generate the SSH key
-
-		$ ssh-keygen -t rsa
-	
-		Note:After given above cmd there asking few input data (like file name, passpharse and etc), Don't give any input just press enter for all questions.
-
-	* Refer the log, SSH keys are generated in Home directory (Inside have /.ssh/id_rsa.pub)
-
-Step-2: Copy that SSH key inside of file "id_rsa.pub", and paste in Remote server (authorised_key)
-
-	* Login Remote server as root user, 
-	
-	* Go to the directory - /home/git/.ssh/
-
-	* add the user SSH key in the file "authorised_key"
 
 
-
-Type2 - Http access
--------------------
-
-Step-1: Login server as root user
-
-Step-2: Use below cmd to create new user
-
-		$ htpasswd /home/git/.htpasswd username
-		
-		Note: replace your username in username
-	
-	* View the added users, use below cmd
-	
-		$ cat /home/git/.htpasswd
-	
-	* To modify the existing user password repeate the same cmd
 
 
