@@ -35,6 +35,54 @@ Step-3: After run above cmd it prompt the options.
 	* You can configure what you want related to git
 	
 
+New Repo Name & URL Details:
+----------------------------
+
+Repo Name:
+CC8201_HD_C_TOPREAL_CARDLESS_AS_SSC
+
+Repo URLs:
+http://192.168.0.150/git/CC8201_HD_C_TOPREAL_CARDLESS_AS_SSC.git
+
+http://127.0.0.1/git/CC8201_HD_C_TOPREAL_CARDLESS_AS_SSC.git
+
+Note: (Use below cmd for Hisi SDK repositories)
+-----------------------------------------------
+	find . -type d -empty -exec touch {}/.gitkeep \;
+	
+Note: Above command is commonly used to ensure empty directories are preserved in a Git repository
 
 
+10.04.2025
+----------
 
+From local GIT Server Tag creating 
+----------------------------------
+
+1. For Last commit tag set
+	
+	# git tag -a Production_SW_V01 -m "Tagging version 1.1 at feature commit"
+	
+	# git push origin --tags
+	
+2. For set tag on sepecific commit
+
+	# git tag -a Production_SW_V01 0bsdfsdree -m "Tagging version 1.1 at feature commit"
+		Note: Replace commit ID & Message
+		
+	# git push origin --tags
+	
+	
+3. Delete existing tag 
+
+	# git tag -d <old_tag_name> 
+	
+		Note: To delete the tag from local repository
+		
+	# git push origin :refs/tags/<old_tag_name> 
+	
+		Note: To delete the exsiting tag from remote repo also
+		
+	# git push origin --tags
+		
+	
